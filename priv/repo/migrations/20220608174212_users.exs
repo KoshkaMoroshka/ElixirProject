@@ -10,7 +10,7 @@ defmodule ElixirProject.Repo.Migrations.Users do
       timestamps()
     end
 
-    create unique_index :users, [:login]
-    create unique_index :users, [:email]
+    create unique_index(:users, [:login])
+    create unique_index(:users, [:email])
   end
 end

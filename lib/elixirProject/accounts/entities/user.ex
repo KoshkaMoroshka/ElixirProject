@@ -20,7 +20,9 @@ defmodule ElixirProject.Accounts.Entities.User do
     |> validate_required(@required)
     |> unique_constraint(:email, message: "Already registered to this address")
     |> unique_constraint(:login, message: "This login already exists")
-    |> validate_format(:password, ~r/^(?=.*\d)(?=.*[a-z])(?=.*[a-zA-Z]).{8,}/, message: "Does not meet the requirements")
+    |> validate_format(:password, ~r/^(?=.*\d)(?=.*[a-z])(?=.*[a-zA-Z]).{8,}/,
+      message: "Does not meet the requirements"
+    )
     |> put_password_hash()
   end
 
