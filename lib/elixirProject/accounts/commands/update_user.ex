@@ -5,6 +5,6 @@ defmodule ElixirProject.Accounts.Commands.UpdateUser do
   def process(%User{} = user, attrs) do
     user
     |> User.update_changeset(attrs)
-    |> Repo.insert()
+    |> Repo.update()
   end
 end
