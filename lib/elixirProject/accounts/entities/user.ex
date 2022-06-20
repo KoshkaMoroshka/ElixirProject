@@ -2,6 +2,8 @@ defmodule ElixirProject.Accounts.Entities.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias ElixirProject.Spellbooks.Entities.Spellbook
+
   @required [:login, :password, :email]
 
   schema "users" do
@@ -9,6 +11,7 @@ defmodule ElixirProject.Accounts.Entities.User do
     field :login, :string
     field :password, :string, virtual: true
     field :password_hash, :string
+    has_many :spellbook, Spellbook
 
     timestamps()
   end
