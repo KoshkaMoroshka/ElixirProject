@@ -7,7 +7,10 @@ defmodule ElixirProject.Repo.Migrations.Spells do
       add :level, :integer, null: false
       add :castingTime, :string, null: false
       add :duration, :string, null: false
-      #add :
+      # add :characterClass_id, references(:characterClasses)
+      add :magickSchool_id, references(:magickSchools)
+      add :sourceSpell_id, references(:sourcesSpells)
+      add :description, :string
 
 
       timestamps()
