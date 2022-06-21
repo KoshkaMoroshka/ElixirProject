@@ -1,6 +1,6 @@
 Получить название класса по ID / Get character class data by ID
 
-chrClass = ElixirProject.CharacterClasses.Queries.GetCharacterClass.process(1)
+{status, chrClass} = ElixirProject.CharacterClasses.Queries.GetCharacterClass.process(1)
 
 
 

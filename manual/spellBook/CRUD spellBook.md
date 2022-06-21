@@ -8,9 +8,3 @@ ElixirProject.Spellbooks.Commands.UpdateSpellbook.process(%ElixirProject.Spellbo
 
 Delete:
 ElixirProject.Spellbooks.Commands.DeleteSpellbook.process(%ElixirProject.Spellbooks.Entities.Spellbook{id: 1})
-
-
-
-
-
-ElixirProject.Spellbooks.Commands.CreateSpellbook.process(%{nameSpellbook: "JoinTheArmySon", user_id: b.id})

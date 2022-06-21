@@ -4,8 +4,12 @@ defmodule ElixirProject.SourcesSpells.Entities.SourceSpell do
 
   @required [:nameSource]
 
+  alias ElixirProject.Spells.Entities.Spell
+
   schema "sourcesSpells" do
     field :nameSource, :string
+
+    has_many :spells, Spell
 
     timestamps()
   end

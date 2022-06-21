@@ -8,3 +8,4 @@ ElixirProject.SourcesSpells.Commands.UpdateSourceSpell.process(%ElixirProject.So
 
 Delete:
 ElixirProject.SourcesSpells.Commands.DeleteSourceSpell.process(%ElixirProject.SourcesSpells.Entities.SourceSpell{id: 1})
+

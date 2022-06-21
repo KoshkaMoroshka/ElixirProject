@@ -2,11 +2,14 @@ defmodule ElixirProject.MagickSchools.Entities.MagickSchools do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias ElixirProject.Spells.Entities.Spell
+
   @required [:nameSchool]
 
   schema "magickSchools" do
     field :nameSchool, :string
 
+    has_many :spells, Spell
     timestamps()
   end
 
