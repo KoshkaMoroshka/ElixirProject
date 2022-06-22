@@ -1,6 +1,6 @@
 Получить данные пользователя по ID / Get user data by ID
 
-user = ElixirProject.Accounts.Queries.GetUser.process(1)
+{status, user} = ElixirProject.Accounts.Queries.GetUser.process(1)
 
 
 

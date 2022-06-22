@@ -4,24 +4,30 @@ defmodule ElixirProject.Spellbooks.Entities.Spellbook do
   import Ecto.Changeset
 
   alias ElixirProject.Accounts.Entities.User
+  alias ElixirProject.Spells.Entities.Spell
+  alias SpellsSpellbooks
+  alias ElixirProject.Repo
 
   @required [
-    :nameSpellbook,
+    :name_spellbook,
     :user_id
   ]
 
-  schema "spellBooks" do
-    field :nameSpellbook, :string
+  schema "spellbooks" do
+    field :name_spellbook, :string
     belongs_to :user, User
+
+    many_to_many :spells, Spell, join_through: SpellsSpellbooks
 
     timestamps()
   end
 
   def create_changeset(%__MODULE__{} = spellbook, attrs) do
     spellbook
+    |> Repo.preload(:users)
     |> cast(attrs, @required)
     |> validate_required(@required)
-    |> unique_constraint(:nameSpellbook, messgae: "The name of such a spellbook already exists")
+    |> unique_constraint(:name_spellbook, messgae: "The name of such a spellbook already exists")
     |> assoc_constraint(:user)
   end
 

@@ -1,6 +1,6 @@
 
 
-spellbook = ElixirProject.Spellbooks.Queries.GetSpellbook.process(1)
+{status, spellbook} = ElixirProject.Spellbooks.Queries.GetSpellbook.process(1)
 
 
 

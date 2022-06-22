@@ -6,7 +6,9 @@ defmodule ElixirProject.Spells.Entities.Spell do
   alias ElixirProject.CharacterClasses.Entities.CharacterClasses
   alias ElixirProject.MagickSchools.Entities.MagickSchools
   alias ElixirProject.SourcesSpells.Entities.SourceSpell
+  alias ElixirProject.Spellbooks.Entities.Spellbook
   alias SpellsCharactersClass
+  alias SpellsSpellbooks
   alias ElixirProject.Repo
 
   @required [
@@ -16,6 +18,10 @@ defmodule ElixirProject.Spells.Entities.Spell do
     :duration,
     :magickSchool_id,
     :sourceSpell_id,
+  ]
+
+  @optional [
+    :description
   ]
 
   schema "spells" do
@@ -28,6 +34,7 @@ defmodule ElixirProject.Spells.Entities.Spell do
     field :description, :string
 
     many_to_many :characterClasses, CharacterClasses, join_through: SpellsCharactersClass
+    many_to_many :spellbooks, Spellbook, join_through: SpellsSpellbooks
 
     timestamps()
   end
@@ -35,17 +42,15 @@ defmodule ElixirProject.Spells.Entities.Spell do
   def create_changeset(%__MODULE__{} = spell, attrs) do
     spell
     |> Repo.preload(:characterClasses)
-    |> cast(attrs, @required)
+    |> Repo.preload(:magickSchool)
+    |> Repo.preload(:sourceSpell)
+    |> cast(attrs, @required ++ @optional)
     |> validate_required(@required)
     |> assoc_constraint(:magickSchool)
     |> assoc_constraint(:sourceSpell)
     # Set the association
     |> put_assoc(:characterClasses, [attrs.characterClasses])
+
   end
 
-
-#ElixirProject.Spells.Commands.CreateSpell.process(%{nameSpell: "Wjuh", level: 2, castingTime: "Mnoga", duration: "lolka", magickSchool_id: b.id, sourceSpell_id: d.id, description: "hahahahahahah"})
-#{a,b} = ElixirProject.MagickSchool.Queries.GetMagickSchool.process(1)
-#{c,d} = ElixirProject.SourcesSpells.Queries.GetSourceSpell.process(2)
-#ElixirProject.Spells.Commands.CreateSpell.process(%{nameSpell: "Wjuh", level: 2, castingTime: "Mnoga", duration: "lolka", magickSchool_id: b.id, sourceSpell_id: d.id, characterClasses_id: [chrClass.id, chrClass2.id], description: "hahahahahahah"})
 end

@@ -4,6 +4,7 @@ defmodule ElixirProject.CharacterClasses.Entities.CharacterClasses do
 
   alias ElixirProject.Spells.Entities.Spell
   alias SpellsCharactersClass
+  alias ElixirProject.Repo
 
   @required [:nameClass]
 
@@ -18,6 +19,7 @@ defmodule ElixirProject.CharacterClasses.Entities.CharacterClasses do
   @doc false
   def create_changeset(%__MODULE__{} = characterClasses, attrs) do
     characterClasses
+    |> Repo.preload(:spells)
     |> cast(attrs, @required)
     |> validate_required(@required)
     |> unique_constraint(:nameClass, message: "Such a character class already exists")

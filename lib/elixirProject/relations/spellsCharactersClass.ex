@@ -5,9 +5,9 @@ defmodule SpellsCharactersClass do
   alias ElixirProject.CharacterClasses.Entities.CharacterClasses
 
   @primary_key false
-  schema "spellsCharacterClasses" do
-    belongs_to :spell, Spell
-    belongs_to :characterClasses, CharacterClasses
+  schema "spells_character_classes" do
+    belongs_to :spell, Spell, primary_key: true
+    belongs_to :characterClasses, CharacterClasses, primary_key: true
 
     # Added bonus, a join schema will also allow you to set timestamps
     timestamps()

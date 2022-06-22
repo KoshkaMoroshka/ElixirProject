@@ -1,3 +1,5 @@
+Test many-to-many (Spell/CharacterClasses)
+
 ElixirProject.CharacterClasses.Commands.CreateCharacterClasses.process(%{nameClass: "warrior"})
 ElixirProject.CharacterClasses.Commands.CreateCharacterClasses.process(%{nameClass: "mage"})
 ElixirProject.MagickSchools.Commands.CreateMagickSchool.process(%{nameSchool: "Illusion"})
@@ -8,5 +10,14 @@ ElixirProject.SourcesSpells.Commands.CreateSourceSpell.process(%{nameSource: "Br
 {c,d} = ElixirProject.SourcesSpells.Queries.GetSourceSpell.process(2)
 {status, chrClass} = ElixirProject.CharacterClasses.Queries.GetCharacterClass.process(1)
 {status, chrClass2} = ElixirProject.CharacterClasses.Queries.GetCharacterClass.process(2)
-----------------ElixirProject.Spells.Commands.CreateSpell.process(%{nameSpell: "Wjuh", level: 2, castingTime: "Mnoga", duration: "lolka", magickSchool_id: b.id, sourceSpell_id: d.id, characterClasses_id: [chrClass.id, chrClass2.id], description: "hahahahahahah"})
 ElixirProject.Spells.Commands.CreateSpell.process(%{nameSpell: "Wjuh", level: 2, castingTime: "Mnoga", duration: "lolka", magickSchool_id: b.id, sourceSpell_id: d.id, characterClasses: chrClass2, description: "hahahahahahah"})
+
+Test many-to-many (Spellbook/Spell)
+
+ElixirProject.Accounts.Commands.CreateUser.process(%{email: "Padla@mail.ru", login: "BomBom", password: "LolKek23"})
+{status, user} = ElixirProject.Accounts.Queries.GetUser.process(1)
+ElixirProject.Spellbooks.Commands.CreateSpellbook.process(%{name_spellbook: "JoinTheArmySon", user_id: user.id})
+{status, spellbook} = ElixirProject.Spellbooks.Queries.GetSpellbook.process(1)
+{status, spell} = ElixirProject.Spells.Queries.GetSpell.process(1)
+
+ElixirProject.CommandsSpellbook.AddSpell.process(%{spellbook_id: spellbook.id, spell_id: spell.id})   
