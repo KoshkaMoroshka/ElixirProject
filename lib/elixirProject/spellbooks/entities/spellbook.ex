@@ -24,7 +24,7 @@ defmodule ElixirProject.Spellbooks.Entities.Spellbook do
 
   def create_changeset(%__MODULE__{} = spellbook, attrs) do
     spellbook
-    |> Repo.preload(:users)
+    |> Repo.preload(:user)
     |> cast(attrs, @required)
     |> validate_required(@required)
     |> unique_constraint(:name_spellbook, messgae: "The name of such a spellbook already exists")

@@ -1,11 +1,11 @@
-defmodule Charlist.Accounts do
-  alias Charlist.Accounts.Commands.{
+defmodule ElixirProject.Accounts do
+  alias ElixirProject.Accounts.Commands.{
     CreateUser,
     DeleteUser,
     UpdateUser
   }
 
-  alias Charlist.Accounts.Queries.{
+  alias ElixirProject.Accounts.Queries.{
     GetUser,
     ListUsers
   }

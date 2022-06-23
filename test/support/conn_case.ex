@@ -23,6 +23,7 @@ defmodule ElixirProjectWeb.ConnCase do
       import Plug.Conn
       import Phoenix.ConnTest
       import ElixirProjectWeb.ConnCase
+      import ElixirProject.DataCase
 
       alias ElixirProjectWeb.Router.Helpers, as: Routes
 

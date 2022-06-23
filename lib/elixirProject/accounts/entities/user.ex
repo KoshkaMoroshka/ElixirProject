@@ -7,7 +7,7 @@ defmodule ElixirProject.Accounts.Entities.User do
   @required [:login, :password, :email]
 
   schema "users" do
-    field :email, EmailEctoType
+    field :email, :string
     field :login, :string
     field :password, :string, virtual: true
     field :password_hash, :string
