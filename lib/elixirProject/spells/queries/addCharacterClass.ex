@@ -1,10 +1,10 @@
 defmodule ElixirProject.Spells.Queries.AddCharacterClass do
   alias ElixirProject.Repo
-  alias SpellsCharactersClass
+  alias ElixirProject.CharacterClasses.Entities.CharacterClasses
 
-  def process(attrs) do
-    %SpellsCharactersClass{}
-    |> SpellsCharactersClass.changeset(attrs)
-    |> Repo.insert()
+  def process(%CharacterClasses{} = character_classes, attrs) do
+    character_classes
+    |> CharacterClasses.add_characterClasses_changeset(attrs)
+    |> Repo.update()
   end
 end

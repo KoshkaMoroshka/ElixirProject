@@ -34,6 +34,7 @@ defmodule ElixirProject.Spellbooks.Entities.Spellbook do
   def add_spell_changeset(%__MODULE__{} = spellbook, attrs) do
     spellbook
     |> Repo.preload(:spells)
+    |> Ecto.Changeset.change()
     |> put_assoc(:spells, attrs.spells)
   end
 

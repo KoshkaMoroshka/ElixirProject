@@ -52,4 +52,11 @@ defmodule ElixirProject.Spells.Entities.Spell do
     |> put_assoc(:character_classes, attrs.character_classes)
   end
 
+
+  def add_characterClasses_changeset(%__MODULE__{} = spell, attrs) do
+    spell
+    |> Repo.preload(:character_classes)
+    |> Ecto.Changeset.change()
+    |> put_assoc(:character_classes, attrs.character_classes)
+  end
 end

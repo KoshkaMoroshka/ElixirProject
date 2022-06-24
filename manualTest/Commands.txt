@@ -21,5 +21,4 @@ ElixirProject.Spellbooks.Commands.CreateSpellbook.process(%{name_spellbook: "Joi
 {status, spellbook} = ElixirProject.Spellbooks.Queries.GetSpellbook.process(1)
 {status, spell} = ElixirProject.Spells.Queries.GetSpell.process(1)
 
-ElixirProject.Spellbooks.Queries.AddSpell.process(%ElixirProject.Spellbooks.Entities.Spellbook{id: 1}, %{spells: [spell]})
-ElixirProject.Spellbooks.Queries.AddSpell.process(%{spellbook: spellbook}, %{spells: [spell]})
+ElixirProject.Spellbooks.Queries.AddSpell.process(spellbook, %{spells: [spell]})
