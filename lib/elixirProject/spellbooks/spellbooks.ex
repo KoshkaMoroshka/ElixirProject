@@ -19,6 +19,6 @@ defmodule ElixirProject.Spellbooks do
   # Queries
   defdelegate get_spellbook(id), to: GetSpellbook, as: :process
   defdelegate list_spellbook(), to: ListSpellbook, as: :process
-  defdelegate add_spell(spellAndSpellbooksId), to: AddSpell, as: :process
+  defdelegate add_spell(spellbook, spell), to: AddSpell, as: :process
 
 end

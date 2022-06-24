@@ -42,8 +42,8 @@ defmodule ElixirProject.Spells.Entities.Spell do
   def create_changeset(%__MODULE__{} = spell, attrs) do
     spell
     |> Repo.preload(:character_classes)
-    |> Repo.preload(:magickSchools)
-    |> Repo.preload(:sourceSpells)
+    |> Repo.preload(:magickSchool)
+    |> Repo.preload(:sourceSpell)
     |> cast(attrs, @required ++ @optional)
     |> validate_required(@required)
     |> assoc_constraint(:magickSchool)

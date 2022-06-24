@@ -4,10 +4,21 @@ defmodule ElixirProject.Spells.Queries.ListSpell do
 
   import Ecto.Query, only: [from: 2]
 
-  def process() do
+  def process(params) do
     Spell
-    # |> with_nameSpell(params)
-
+    |> with_characterClasses()
+    |> with_magickSchools()
+    |> with_sourcesSpells()
+    |> with_nameSpell(params)
+    |> with_level(params)
+    |> with_castingTime(params)
+    |> with_duration(params)
+    |> with_magickSchool(params)
+    |> with_sourceSpell(params)
+    |> with_CharacterClasses(params)
+    |> with_description(params)
+    |> select_fields()
+    |> Repo.paginate(params)
   end
 
 #-------------------------------------------------------------------------------
@@ -83,23 +94,60 @@ defmodule ElixirProject.Spells.Queries.ListSpell do
   defp with_sourceSpell(query, %{nameSource: nil}), do: query
 
   #-------------------------------------------------------------------------------
-  # defp with_description(query, %{description: description}) do
-  #   description = "%" <> String.trim(description) <> "%"
+  defp with_description(query, %{description: description}) do
+    description = "%" <> String.trim(description) <> "%"
 
-  #   from i in query,
-  #     where: ilike(description, ^description)
-  # end
+    from i in query,
+      where: ilike(i.description, ^description)
+  end
 
-  # defp with_description(query, _), do: query
+  defp with_description(query, _), do: query
 
-  # defp with_description(query, %{description: nil}), do: query
+  defp with_description(query, %{description: nil}), do: query
 
   #-------------------------------------------------------------------------------
 
-  # defp with_name(query, _), do: query
+  defp with_CharacterClasses(query, %{nameClass: nameClass}) do
+    nameClass = "%" <> String.trim(nameClass) <> "%"
 
-  # defp select_fields(query) do
-  #   from i in query,
-  #     select: %{id: i.id, name: i.name}
-  # end
+    from i in query,
+      join: character_classes in assoc(i, :character_classes),
+      where: ilike(character_classes.nameClass, ^nameClass)
+  end
+
+  defp with_CharacterClasses(query, _), do: query
+
+  defp with_CharacterClasses(query, %{nameClass: nil}), do: query
+
+  #-------------------------------------------------------------------------------
+
+  defp with_characterClasses(query) do
+    from i in query,
+    join: cc in assoc(i, :character_classes)
+  end
+
+  defp with_magickSchools(query) do
+    from i in query,
+    join: ms in assoc(i, :magickSchool)
+  end
+
+  defp with_sourcesSpells(query) do
+    from i in query,
+    join: ss in assoc(i, :sourceSpell)
+  end
+
+  defp select_fields(query) do
+    from [i, cc, ms, ss] in query,
+    select: %{
+    id: i.id,
+    nameSpell: i.nameSpell,
+    level: i.level,
+    castingTime: i.castingTime,
+    duration: i.duration,
+    magickSchool: ms.nameSchool,
+    sourceSpell: ss.nameSource,
+    description: i.description
+    }
+  end
+
 end

@@ -10,8 +10,7 @@ ElixirProject.SourcesSpells.Commands.CreateSourceSpell.process(%{nameSource: "Br
 {c,d} = ElixirProject.SourcesSpells.Queries.GetSourceSpell.process(2)
 {status, chrClass} = ElixirProject.CharacterClasses.Queries.GetCharacterClass.process(1)
 {status, chrClass2} = ElixirProject.CharacterClasses.Queries.GetCharacterClass.process(2)
-{status, spell} = ElixirProject.Spells.Commands.CreateSpell.process(%{nameSpell: "Wjuh", level: 2, castingTime: "Mnoga", duration: "lolka", magickSchool_id: b.id, sourceSpell_id: d.id, description: "hahahahahahah"}, characterClasses: [chrClass, chrClass2])
-{status, spellCharacterClass} = ElixirProject.Spells.Queries.AddCharacterClass.process(%{spell_id: spell.id, characterClasses_id: chrClass.id})
+{status, spell} = ElixirProject.Spells.Commands.CreateSpell.process(%{nameSpell: "Wjuh", level: 2, castingTime: "Mnoga", duration: "lolka", magickSchool_id: b.id, sourceSpell_id: d.id, description: "hahahahahahah", character_classes: [chrClass, chrClass2]})
 
 Test many-to-many (Spellbook/Spell)
 
