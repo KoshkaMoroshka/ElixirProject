@@ -3,6 +3,8 @@ defmodule ElixirProject.Repo do
     otp_app: :elixirProject,
     adapter: Ecto.Adapters.Postgres
 
+  use Scrivener, page_size: 10
+
     def fetch_one(query) do
       case __MODULE__.one(query) do
         nil ->

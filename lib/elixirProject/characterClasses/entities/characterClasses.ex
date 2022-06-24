@@ -8,7 +8,7 @@ defmodule ElixirProject.CharacterClasses.Entities.CharacterClasses do
 
   @required [:nameClass]
 
-  schema "characterClasses" do
+  schema "character_classes" do
     field :nameClass, :string
 
     many_to_many :spells, Spell, join_through: SpellsCharactersClass
@@ -17,8 +17,8 @@ defmodule ElixirProject.CharacterClasses.Entities.CharacterClasses do
   end
 
   @doc false
-  def create_changeset(%__MODULE__{} = characterClasses, attrs) do
-    characterClasses
+  def create_changeset(%__MODULE__{} = character_classes, attrs) do
+    character_classes
     |> Repo.preload(:spells)
     |> cast(attrs, @required)
     |> validate_required(@required)

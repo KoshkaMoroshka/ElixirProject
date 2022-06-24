@@ -1,10 +1,10 @@
 defmodule ElixirProject.Spellbooks.Queries.AddSpell do
   alias ElixirProject.Repo
-  alias SpellsSpellbooks
+  alias ElixirProject.Spellbooks.Entities.Spellbook
 
-  def process(attrs) do
-    %SpellsSpellbooks{}
-    |> SpellsSpellbooks.changeset(attrs)
-    |> Repo.insert()
+  def process(%Spellbook{} = spellbook, attrs) do
+    spellbook
+    |> Spellbook.add_spell_changeset(attrs)
+    |> Repo.update()
   end
 end

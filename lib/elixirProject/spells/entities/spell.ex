@@ -33,7 +33,7 @@ defmodule ElixirProject.Spells.Entities.Spell do
     belongs_to :sourceSpell, SourceSpell
     field :description, :string
 
-    many_to_many :characterClasses, CharacterClasses, join_through: SpellsCharactersClass
+    many_to_many :character_classes, CharacterClasses, join_through: SpellsCharactersClass
     many_to_many :spellbooks, Spellbook, join_through: SpellsSpellbooks
 
     timestamps()
@@ -41,16 +41,15 @@ defmodule ElixirProject.Spells.Entities.Spell do
 
   def create_changeset(%__MODULE__{} = spell, attrs) do
     spell
-    |> Repo.preload(:characterClasses)
-    |> Repo.preload(:magickSchool)
-    |> Repo.preload(:sourceSpell)
+    |> Repo.preload(:character_classes)
+    |> Repo.preload(:magickSchools)
+    |> Repo.preload(:sourceSpells)
     |> cast(attrs, @required ++ @optional)
     |> validate_required(@required)
     |> assoc_constraint(:magickSchool)
     |> assoc_constraint(:sourceSpell)
     # Set the association
-    |> put_assoc(:characterClasses, [attrs.characterClasses])
-
+    |> put_assoc(:character_classes, attrs.character_classes)
   end
 
 end

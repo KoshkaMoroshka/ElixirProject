@@ -31,4 +31,10 @@ defmodule ElixirProject.Spellbooks.Entities.Spellbook do
     |> assoc_constraint(:user)
   end
 
+  def add_spell_changeset(%__MODULE__{} = spellbook, attrs) do
+    spellbook
+    |> Repo.preload(:spells)
+    |> put_assoc(:spells, attrs.spells)
+  end
+
 end

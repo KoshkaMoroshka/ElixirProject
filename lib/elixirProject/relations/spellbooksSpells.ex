@@ -1,6 +1,9 @@
 defmodule SpellsSpellbooks do
   use Ecto.Schema
 
+  import Ecto.Changeset
+  alias ElixirProject.Repo
+
   alias ElixirProject.Spellbooks.Entities.Spellbook
   alias ElixirProject.Spells.Entities.Spell
 
@@ -15,7 +18,7 @@ defmodule SpellsSpellbooks do
 
   def changeset(struct, params \\ %{}) do
     struct
-    |> Ecto.Changeset.cast(params, [:spellbook_id, :spell_id])
-    |> Ecto.Changeset.validate_required([:spellbook_id, :spell_id])
+    |> Ecto.Changeset.cast(params, [:spellbook.id, :spell.id])
+    |> Ecto.Changeset.validate_required([:spellbook.id, :spell.id])
   end
 end
