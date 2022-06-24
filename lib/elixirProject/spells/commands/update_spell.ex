@@ -4,7 +4,7 @@ defmodule ElixirProject.Spells.Commands.UpdateSpell do
 
   def process(%Spell{} = spell, attrs) do
     spell
-    |> Spell.create_changeset(attrs)
+    |> Spell.update_changeset(attrs)
     |> Repo.update()
   end
 end

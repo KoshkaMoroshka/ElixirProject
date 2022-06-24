@@ -12,6 +12,7 @@ defmodule ElixirProjectWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug ProperCase.Plug.SnakeCaseParams
   end
 
   scope "/", ElixirProjectWeb do
@@ -32,25 +33,25 @@ defmodule ElixirProjectWeb.Router do
   # If your application does not have an admins-only section yet,
   # you can use Plug.BasicAuth to set up some basic authentication
   # as long as you are also using SSL (which you should anyway).
-  if Mix.env() in [:dev, :test] do
-    import Phoenix.LiveDashboard.Router
+  # if Mix.env() in [:dev, :test] do
+  #   import Phoenix.LiveDashboard.Router
 
-    scope "/" do
-      pipe_through :browser
+    # scope "/" do
+    #   pipe_through :browser
 
-      live_dashboard "/dashboard", metrics: ElixirProjectWeb.Telemetry
-    end
-  end
+  #     live_dashboard "/dashboard", metrics: ElixirProjectWeb.Telemetry
+  #   end
+  # end
 
   # Enables the Swoosh mailbox preview in development.
   #
   # Note that preview only shows emails that were sent by the same
   # node running the Phoenix server.
-  if Mix.env() == :dev do
-    scope "/dev" do
-      pipe_through :browser
+  scope "/api/v1", ElixirProjectWeb.Ver1 do
+    pipe_through :api
 
-      forward "/mailbox", Plug.Swoosh.MailboxPreview
-    end
+    resources "/items", SpellController, only: [:index, :show]
   end
+
+
 end

@@ -1,11 +1,11 @@
-defmodule ElixirProject.Accounts.Queries.GetSpellbookTest do
+defmodule ElixirProject.Spellbooks.Queries.GetSpellbookTest do
   use ElixirProject.DataCase
 
   alias ElixirProject.Spellbooks
 
-  @tag :getusers
+  @tag :getspellbook
   test "process/1 get spellbook by id" do
-    spellbook = insert(:spellbook) |> IO.inspect
+    spellbook = insert(:spellbook)
     assert {:ok, result} = Spellbooks.get_spellbook(spellbook.id)
     assert spellbook.id == result.id
   end

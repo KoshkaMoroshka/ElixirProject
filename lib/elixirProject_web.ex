@@ -23,6 +23,8 @@ defmodule ElixirProjectWeb do
 
       import Plug.Conn
       import ElixirProjectWeb.Gettext
+
+      alias Plug.Conn
       alias ElixirProjectWeb.Router.Helpers, as: Routes
     end
   end

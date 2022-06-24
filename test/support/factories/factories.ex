@@ -3,6 +3,10 @@ defmodule ElixirProject.Factories do
 
   use ElixirProject.Factories.{
     Accounts.UserFactory,
-    Spellbooks.SpelbookFactory
+    Spellbooks.SpelbookFactory,
+    CharacterClasses.CharacterClassesFactory,
+    MagickSchools.MagickSchoolsFactory,
+    SourcesSpells.SourceSpellFactory,
+    Spells.SpellFactory
   }
 end

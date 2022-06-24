@@ -33,7 +33,7 @@ defmodule ElixirProject.Spells.Entities.Spell do
     belongs_to :sourceSpell, SourceSpell
     field :description, :string
 
-    many_to_many :character_classes, CharacterClasses, join_through: SpellsCharactersClass
+    many_to_many :character_classes, CharacterClasses, join_through: SpellsCharactersClass,  on_delete: :delete_all
     many_to_many :spellbooks, Spellbook, join_through: SpellsSpellbooks
 
     timestamps()
@@ -58,5 +58,10 @@ defmodule ElixirProject.Spells.Entities.Spell do
     |> Repo.preload(:character_classes)
     |> Ecto.Changeset.change()
     |> put_assoc(:character_classes, attrs.character_classes)
+  end
+
+  def update_changeset(%__MODULE__{} = spell, attrs) do
+    spell
+    |> cast(attrs, @required ++ @optional)
   end
 end

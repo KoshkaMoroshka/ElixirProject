@@ -1,4 +1,4 @@
-defmodule ElixirProject.Accounts.Commands.DeleteSpellbookTest do
+defmodule ElixirProject.Spellbooks.Commands.DeleteSpellbookTest do
   use ElixirProject.DataCase
 
   alias ElixirProject.Spellbooks

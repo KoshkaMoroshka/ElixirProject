@@ -1,4 +1,4 @@
-defmodule ElixirProject.Accounts.Queries.ListUsersTest do
+defmodule ElixirProject.Spellbooks.Queries.ListSpellbooksTest do
   use ElixirProject.DataCase
 
   alias ElixirProject.Spellbooks

@@ -24,6 +24,7 @@ defmodule ElixirProjectWeb.ConnCase do
       import Phoenix.ConnTest
       import ElixirProjectWeb.ConnCase
       import ElixirProject.DataCase
+      import ElixirProject.Factories
 
       alias ElixirProjectWeb.Router.Helpers, as: Routes
 

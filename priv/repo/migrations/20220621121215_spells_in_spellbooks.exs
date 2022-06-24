@@ -4,7 +4,7 @@ defmodule ElixirProject.Repo.Migrations.SpellsInSpellbooks do
     def change do
       create table(:spells_in_spellbooks) do
         add :spellbook_id, references(:spellbooks)
-        add :spell_id, references(:spells)
+        add :spell_id, references(:spells), on_delete: :delete_all
 
         timestamps()
     end
