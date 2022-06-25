@@ -27,7 +27,7 @@ defmodule ElixirProject.Spellbooks.Entities.Spellbook do
     |> Repo.preload(:user)
     |> cast(attrs, @required)
     |> validate_required(@required)
-    |> unique_constraint(:name_spellbook, messgae: "The name of such a spellbook already exists")
+    |> unique_constraint(:name_spellbook, message: "The name of such a spellbook already exists")
     |> assoc_constraint(:user)
   end
 

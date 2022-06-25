@@ -50,6 +50,8 @@ defmodule ElixirProjectWeb.Router do
   scope "/api/v1", ElixirProjectWeb.Ver1 do
     pipe_through :api
 
+    resources "/charlists", SpellbookController, only: [:index, :show, :create, :update]
+
     resources "/items", SpellController, only: [:index, :show]
   end
 

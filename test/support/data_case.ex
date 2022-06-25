@@ -16,6 +16,9 @@ defmodule ElixirProject.DataCase do
 
   use ExUnit.CaseTemplate
 
+  alias ElixirProject.Repo
+  alias Ecto.Adapters.SQL.Sandbox
+
   using do
     quote do
       alias ElixirProject.Repo
@@ -29,7 +32,8 @@ defmodule ElixirProject.DataCase do
   end
 
   setup tags do
-    ElixirProject.DataCase.setup_sandbox(tags)
+    pid = Sandbox.start_owner!(Repo, shared: not tags[:async])
+    on_exit(fn -> Sandbox.stop_owner(pid) end)
     :ok
   end
 
