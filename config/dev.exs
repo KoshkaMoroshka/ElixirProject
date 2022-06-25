@@ -10,6 +10,9 @@ config :elixirProject, ElixirProject.Repo,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
+
+  config :spellbook, ElixirProject.Accounts.Services.Guardian,
+  secret_key: "2lXnI1xFNVlSQ2qnN2b30W+hLRxWhMj1p/oHh0EVRuHghXyWSODxj1Dcg5duebHA"
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #

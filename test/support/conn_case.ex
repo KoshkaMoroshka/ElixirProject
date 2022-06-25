@@ -31,8 +31,19 @@ defmodule ElixirProjectWeb.ConnCase do
 
       alias ElixirProjectWeb.Router.Helpers, as: Routes
 
+      alias ElixirProject.Accounts.{
+        Entities.User,
+        Services.Guardian
+      }
+
       # The default endpoint for testing
       @endpoint ElixirProjectWeb.Endpoint
+
+      def as_user(conn, %User{} = user) do
+        {:ok, token, _} = Guardian.encode_and_sign(user, %{}, token_type: :access)
+
+        Plug.Conn.put_req_header(conn, "authorization", "bearer: " <> token)
+      end
     end
   end
 

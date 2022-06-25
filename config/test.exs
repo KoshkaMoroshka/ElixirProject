@@ -28,3 +28,6 @@ config :logger, level: :warn
 
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime
+
+config :elixirProject, ElixirProject.Accounts.Services.Guardian,
+secret_key: "1nMyPjRqz/nCDuYGs5mjw8DXXem2L/UFkP/fcbzFSWINmxP++wIVZckNPof4mLQm"

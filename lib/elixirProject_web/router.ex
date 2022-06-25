@@ -15,6 +15,15 @@ defmodule ElixirProjectWeb.Router do
     plug ProperCase.Plug.SnakeCaseParams
   end
 
+  pipeline :user_auth do
+    plug ElixirProject.Accounts.Guardian.Pipeline
+  end
+
+  pipeline :ensure_auth do
+    plug Guardian.Plug.EnsureAuthenticated
+    plug ElixirProjectWeb.CurrentUserPlug
+  end
+
   scope "/", ElixirProjectWeb do
     pipe_through :browser
 
@@ -48,7 +57,12 @@ defmodule ElixirProjectWeb.Router do
   # Note that preview only shows emails that were sent by the same
   # node running the Phoenix server.
   scope "/api/v1", ElixirProjectWeb.Ver1 do
-    pipe_through :api
+
+    pipe_through [:api, :user_auth]
+
+    post "/users", UserController, :create
+
+    pipe_through [:ensure_auth]
 
     resources "/charlists", SpellbookController, only: [:index, :show, :create, :update]
 

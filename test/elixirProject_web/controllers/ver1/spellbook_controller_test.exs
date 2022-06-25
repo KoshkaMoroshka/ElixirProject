@@ -5,17 +5,18 @@ defmodule ElixirProjectWeb.Ver1.SpellbookControllerTest do
 
   setup %{conn: conn} do
     user = insert(:user)
-    conn = assign(conn, :current_user, user)
-    {:ok, %{conn: conn}}
+    conn = as_user(conn, user)
+    {:ok, %{conn: conn, user: user}}
   end
 
-  test "index/2 returns list spellbooks", %{conn: conn} do
-    [spellbook1, spellbook2, spellbook3] =
-      insert_list(3, :spellbook, %{user: conn.assigns.current_user})
+  test "index/2 returns list spellbooks", %{conn: conn, user: user} do
+    [spellbook1, spellbook2, spellbook3] = insert_list(3, :spellbook, %{user: user})
+
+    attrs = %{page: 1, page_size: 5}
 
     response =
       conn
-      |> get(spellbook_path(conn, :index))
+      |> get(spellbook_path(conn, :index), attrs)
       |> json_response(200)
 
     assert response ==

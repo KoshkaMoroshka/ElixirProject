@@ -24,6 +24,7 @@ defmodule ElixirProjectWeb do
       import Plug.Conn
       import ElixirProjectWeb.Gettext
 
+      alias ElixirProjectWeb.ApplyParams
       alias Plug.Conn
       alias ElixirProjectWeb.Router.Helpers, as: Routes
     end

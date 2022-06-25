@@ -25,6 +25,7 @@ config :elixirProject, ElixirProjectWeb.Endpoint,
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
 config :elixirProject, ElixirProject.Mailer, adapter: Swoosh.Adapters.Local
+config :spellbook, ElixirProject.Accounts.Services.Guardian, issuer: "spellbook"
 
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false

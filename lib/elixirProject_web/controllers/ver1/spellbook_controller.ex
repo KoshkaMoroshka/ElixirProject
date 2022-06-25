@@ -6,18 +6,22 @@ defmodule ElixirProjectWeb.Ver1.SpellbookController do
 
   action_fallback(ElixirProjectWeb.FallbackController)
 
-  def index(conn, params) do
-    user = conn.assigns.current_user
-    spellbooks = Spellbooks.Queries.ListSpellbook.process()
-    render(conn, "index.json", %{spellbooks: spellbooks})
+  defmodule IndexSearchParams do
+    use Params.Schema, %{
+      name_spellbook: :string
+    }
   end
 
-  def show(conn, %{"id" => id}) do
-    user = conn.assigns.current_user
-    ElixirProject.Spellbooks.Queries.GetSpellbook.process(id)
+  def index(conn, %{"current_user" => current_user} = params) do
+    with {:ok, params} <- ApplyParams.do_apply(IndexSearchParams, params) do
+      spellbooks = Spellbooks.Queries.ListSpellbook.process()
+      render(conn, "index.json", %{spellbooks: spellbooks})
+    end
+  end
 
+  def show(conn, %{"current_user" => current_user, "id" => id}) do
     with {:ok, spellbook} <- ElixirProject.Spellbooks.Queries.GetSpellbook.process(id),
-         :ok <- Bodyguard.permit(SpellbooksPolicy, :show, user, spellbook) do
+         :ok <- Bodyguard.permit(CharlistPolicy, :show, current_user, spellbook) do
       render(conn, "show.json", %{spellbook: spellbook})
     end
   end
